@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>House Price Estimator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+    --primary: #6a11cb;
+    --secondary: #2575fc;
+    --accent: #00ffd5;
+    --glass: rgba(255,255,255,0.12);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #fff;
+}
+
+/* Main card */
+.app {
+    width: 100%;
+    max-width: 1000px;
+    background: var(--glass);
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+    animation: fadeIn 0.6s ease;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 34px;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.header p {
+    margin-top: 8px;
+    opacity: 0.85;
+    font-size: 15px;
+}
+
+/* Form layout */
+form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 6px;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    outline: 2px solid var(--accent);
+}
+
+/* Full width elements */
+.full {
+    grid-column: span 3;
+}
+
+/* Button */
+button {
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #00ffd5, #00c9ff);
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,255,213,0.45);
+}
+
+/* Result box */
+.result {
+    margin-top: 28px;
+    padding: 22px;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.35);
+    text-align: center;
+    font-size: 24px;
+    color: var(--accent);
+    font-weight: bold;
+    animation: pop 0.4s ease;
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pop {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    form {
+        grid-template-columns: 1fr 1fr;
+    }
+    .full {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+    .full {
+        grid-column: span 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+    <div class="header">
+        <h1>🏡 House Price Estimator</h1>
+        <p>AI-powered real estate valuation system</p>
+    </div>
+
+    <form method="POST">
+
+        <div class="group">
+            <label>Area (sq ft)</label>
+            <input type="number" name="area" required>
+        </div>
+
+        <div class="group">
+            <label>Bedrooms</label>
+            <input type="number" name="bedrooms" required>
+        </div>
+
+        <div class="group">
+            <label>Bathrooms</label>
+            <input type="number" name="bathrooms" required>
+        </div>
+
+        <div class="group">
+            <label>Stories</label>
+            <input type="number" name="stories" required>
+        </div>
+
+        <div class="group">
+            <label>Main Road</label>
+            <select name="mainroad">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Guest Room</label>
+            <select name="guestroom">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Basement</label>
+            <select name="basement">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Hot Water</label>
+            <select name="hotwaterheating">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Air Conditioning</label>
+            <select name="airconditioning">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Parking</label>
+            <input type="number" name="parking" required>
+        </div>
+
+        <div class="group">
+            <label>Preferred Area</label>
+            <select name="prefarea">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Furnishing</label>
+            <select name="furnishingstatus">
+                <option value="1">Unfurnished</option>
+                <option value="2">Semi-Furnished</option>
+                <option value="3">Fully Furnished</option>
+            </select>
+        </div>
+
+        <button class="full" type="submit">Estimate Price</button>
+    </form>
+
+    {% if prediction is not none %}
+        <div class="result">
+            Estimated Price: ₹ {{ "{:,.0f}".format(prediction) }}
+        </div>
+    {% endif %}
+
+    <div class="footer">
+              Machine Learning Regression Model
+    </div>
+</div>
+
+</body>
+</html>
